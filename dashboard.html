@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rafilla's Portfolio</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #0a0f3c, #000000);
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(10, 15, 60, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 3rem;
+      z-index: 999;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .navbar-left h1 {
+      font-size: 1.4rem;
+      background: linear-gradient(to right, #ff25c8, #6b75ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .navbar-right ul {
+      list-style: none;
+      display: flex;
+      gap: 0.1rem;
+    }
+
+    .navbar-right ul li a {
+      font-size: 1rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-right ul li a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #87cefa;
+    }
+
+    .hero-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3rem;
+      max-width: 1200px;
+      margin: auto;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-text {
+      flex: 1 1 500px;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+    }
+
+    @keyframes slideHorizontalFade {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+
+    .highlight-name {
+      background: linear-gradient(to right, #ff64c4, #7d79ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      animation: slideHorizontalFade 4s ease-in-out infinite;
+    }
+
+    @keyframes colorPulse {
+      0%, 100% { filter: hue-rotate(0deg); }
+      50% { filter: hue-rotate(360deg); }
+    }
+
+    .description {
+      margin-top: 1rem;
+      max-width: 480px;
+      font-size: 1.1rem;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-icons img {
+      width: 26px;
+      height: 26px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icons a:hover img {
+      transform: scale(1.2);
+    }
+
+    .hero-buttons {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 0.7rem 1.4rem;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .btn.blue {
+      background: #4ab9ff;
+      color: #000;
+    }
+
+    .btn.download {
+      border: 2px solid #4ab9ff;
+      color: #4ab9ff;
+      background: transparent;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    .hero-image {
+  flex: 1 1 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image img {
+  width: 320px; /* Lebih besar */
+  max-width: 100%;
+  border-radius: 24px;
+  padding: 6px;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image:
+    linear-gradient(#0a0f3c, #0a0f3c),
+    linear-gradient(135deg, #ff64c4, #7d79ff, #4ab9ff);
+  box-shadow: 0 12px 24px rgba(255, 255, 255, 0.1);
+  border: 3px solid transparent;
+  animation: floatUpDown 3s ease-in-out infinite;
+}
+
+    @keyframes floatUpDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    section {
+      padding: 3rem;
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #ffffff33;
+      padding-bottom: 0.5rem;
+    }
+
+    #education {
+  margin-top: 3rem;
+}
+
+.edu-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.edu-card {
+  background: #1e1c2d;
+  padding: 2rem;
+  border-radius: 14px;
+  border: 3px solid transparent;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image:
+    linear-gradient(#1e1c2d, #1e1c2d),
+    linear-gradient(135deg, #ff64c4, #7d79ff, #4ab9ff);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.05);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.edu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 18px rgba(74, 185, 255, 0.2);
+}
+
+.edu-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+  color: #ffffff;
+  background: linear-gradient(to right, #ff64c4, #7d79ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.edu-card p {
+  font-size: 1rem;
+  color: #ccc;
+  margin: 0.4rem 0;
+}
+
+@media (max-width: 768px) {
+  .edu-card {
+    padding: 1.2rem;
+  }
+}
+
+    .skills-container {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.skill-box {
+  flex: 1;
+  min-width: 280px;
+  background: #1e1c2d;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: left;
+  border: 3px solid transparent;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image:
+    linear-gradient(#1e1c2d, #1e1c2d),
+    linear-gradient(135deg, #ff64c4, #7d79ff, #4ab9ff);
+}
+
+    .skill-box h3 {
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .skill-box ul {
+      padding-left: 1rem;
+      list-style-type: disc;
+      line-height: 1.8;
+    }
+
+    .tool-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .tool {
+      background: #1e1c2d;
+      padding: 1rem;
+      border-radius: 12px;
+      width: 120px;
+      text-align: center;
+      border: 3px solid transparent;
+      background-clip: padding-box, border-box;
+      background-origin: padding-box, border-box;
+      background-image:
+        linear-gradient(#1e1c2d, #1e1c2d),
+        linear-gradient(135deg, #ff64c4, #7d79ff, #4ab9ff);
+    }
+
+    .tool img {
+      width: 36px;
+      margin-bottom: 0.5rem;
+      filter: brightness(0) invert(1);
+    }
+
+    .tool p {
+      font-size: 0.85rem;
+    }
+
+    footer {
+  text-align: center;
+  padding: 1.2rem 1rem;
+  background: linear-gradient(135deg, #05092b, #221e9a, #ff64c4);
+  font-size: 0.9rem;
+  margin-top: 4rem;
+}
+
+footer p {
+  margin: 0.6rem 0;
+}
+
+footer .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+footer .social-icons img {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.3s ease;
+}
+
+footer .social-icons a:hover img {
+  transform: scale(1.1);
+}
+
+    @media (max-width: 768px) {
+      .hero-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem;
+  max-width: 1200px;
+  margin: auto;
+  gap: 1.5rem; /* Lebih rapat */
+  flex-wrap: wrap;
+}
+
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar-right ul {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+
+    @keyframes pulseBorder {
+  0% {
+    box-shadow: 0 0 15px rgba(74, 185, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(74, 185, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(74, 185, 255, 0.3);
+  }
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  background: #1e1c2d;
+  border-radius: 16px;
+  overflow: hidden;
+  width: 360px;
+  border: 3px solid transparent;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image:
+    linear-gradient(#1e1c2d, #1e1c2d),
+    linear-gradient(135deg, #ff64c4, #7d79ff, #4ab9ff);
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, scale 0.3s ease;
+  text-align: left;
+}
+
+.project-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  animation: pulseBorder 2s ease-in-out infinite;
+  box-shadow: 0 0 15px rgba(74, 185, 255, 0.3);
+}
+
+.project-card:active {
+  transform: scale(0.97) translateY(2px);
+  transition: transform 0.1s ease;
+}
+
+.project-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.project-content {
+  padding: 1.2rem;
+}
+
+.project-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #ff64c4, #7d79ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.project-description {
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+.certification-section {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-top: 3rem;
+  background: none;
+  border-radius: 16px;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.certification-section h2 {
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  background: linear-gradient(to right, #ff64c4, #7d79ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.certification-section h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  border-left: 4px solid #4ab9ff;
+  color: #ffffff;
+}
+
+.certification-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cert-card {
+  background: #1e1c2d;
+  border: 2px solid #4ab9ff;
+  border-radius: 12px;
+  padding: 1rem;
+  height: 200px; /* Sama tinggi semua */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cert-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 0.7rem;
+}
+
+.cert-card p {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.cert-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 15px rgba(74, 185, 255, 0.3);
+}
+
+.dual-cert-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 3rem;
+  align-items: flex-start; /* Tambahan agar mulai dari atas */
+}
+
+.cert-group {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="navbar-left">
+  <h1><a href="#top">Rafilla Shalwa Sakina</a></h1>
+</div>
+    <nav class="navbar-right">
+      <ul>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certification">Certification</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-section">
+  <div class="hero-text">
+    <h1>Hello, I'm <span class="highlight-name">Rafilla</span></h1>
+    <p class="description">
+      To use data and technology to create useful solutions and make a positive impact in business and society.
+    </p>
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/in/rafilla-shalwa-sakina/" target="_blank">
+    <img src="img/linkedin.png" alt="LinkedIn" width="26" height="26">
+  </a>
+  <a href="https://github.com/rafilla19"><img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub"></a>
+      <a href="https://mail.google.com/mail/u/0/?fs=1&to=rafilla.shalwa@gmail.com&tf=cm"><img src="https://cdn.simpleicons.org/gmail/ffffff" alt="Email"></a>
+    </div>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn blue">View Projects</a>
+      <a href="assets/Rafilla-Shalwa-Sakina.pdf" target="_blank" class="btn download">View CV</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="shalwa.jpg" alt="ID Card">
+  </div>
+</section>
+
+<section id="about" data-aos="fade-up">
+  <h2>About Me</h2>
+  <p>
+    Hello! I'm <strong>Rafilla</strong>, a highly motivated Information Systems student with a strong passion for data and software development, both web and mobile. I'm skilled in end-to-end development, from front-end to back-end, as well as data processing and building machine learning-based solutions. I have experience in analyzing technology and business trends, translating data into actionable insights, and collaborating effectively in teams to consistently deliver high-quality and impactful outcomes.
+  </p>
+  <p style="margin-top: 1rem;">
+    What I love most about data science is the entire process from exploring data, discovering patterns, building models, and transforming ideas into real functional applications. I'm also a lifelong learner who is always curious about new technologies, especially programming languages. I enjoy diving into concepts both simple and complex, and there’s a deep sense of satisfaction when everything finally comes together and works as intended.
+  </p>
+</section>
+
+<section id="education" data-aos="fade-up">
+  <h2>Education Journey</h2>
+  <div class="edu-timeline">
+    <div class="edu-card" data-aos="fade-right">
+      <h3>Senior High School 1 South Cikarang</h3>
+      <p><strong>Major:</strong> MIPA</p>
+      <p><strong>Years:</strong> 2020 – 2023</p>
+      <p>Average Score:</strong> 86,16 / 100</p>
+    </div>
+
+    <div class="edu-card" data-aos="fade-left" data-aos-delay="100">
+      <h3>President University</h3>
+      <p><strong>Major:</strong> Information Systems</p>
+      <p><strong>Years:</strong> 2023 – Present</p>
+      <p><strong>GPA:</strong> 3.81 / 4.00</p>
+      <p><strong>Concentration:</strong> Data Science</p>
+      <p><strong>Relevant Courses:</strong> Machine Learning, Data Mining, software Engineering, Database Systems, Statistics, Python Programming</p>
+      <p><strong>Organization Experience:</strong> HoD of Investment Club Communication Internal Division</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills" data-aos="fade-up">
+  <h2>Skills</h2>
+  <div class="skills-container">
+    <div class="skill-box" data-aos="fade-up">
+      <h3>Hard Skills</h3>
+      <ul>
+        <li>Machine Learning</li>
+        <li>Data Handling & Analysis</li>
+        <li>Data Visualization</li>
+        <li>Full-Stack Development</li>
+        <li>Database (SQL)</li>
+      </ul>
+    </div>
+    <div class="skill-box" data-aos="fade-up" data-aos-delay="100">
+      <h3>Soft Skills</h3>
+      <ul>
+        <li>Analytical Thinking</li>
+        <li>Communication</li>
+        <li>Problem-Solving</li>
+        <li>Attention to Detail</li>
+        <li>Collaboration & Creativity</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="tools" data-aos="fade-up">
+  <h2>Tools I Use</h2>
+  <div class="tool-grid">
+    <div class="tool" data-aos="fade-up">
+      <img src="img/java.png" alt="Java" width="40" height="40">
+      <p>Java</p>
+    </div>
+    <div class="tool" data-aos="fade-up"><img src="https://cdn.simpleicons.org/javascript/ffffff" alt="JavaScript"><p>JavaScript</p></div>
+    <div class="tool" data-aos="fade-up"><img src="https://cdn.simpleicons.org/laravel/ffffff" alt="Laravel"><p>Laravel</p></div>
+    <div class="tool" data-aos="fade-up"><img src="https://cdn.simpleicons.org/flutter/ffffff" alt="Laravel"><p>Flutter</p></div>
+    <div class="tool" data-aos="fade-up"><img src="https://cdn.simpleicons.org/python/ffffff" alt="Python"><p>Python</p></div>
+    <div class="tool" data-aos="fade-up"><img src="https://cdn.simpleicons.org/mysql/ffffff" alt="MySQL"><p>MySQL</p></div>
+    <div class="tool" data-aos="fade-up"><img src="https://cdn.simpleicons.org/django/ffffff" alt="Django"><p>Django</p></div>
+    <div class="tool" data-aos="fade-up"><img src="https://cdn.simpleicons.org/postgresql/ffffff" alt="PgAdmin4"><p>PgAdmin4</p></div>
+    <div class="tool" data-aos="fade-up">
+      <img src="img/micro.png" alt="Microsoft" width="40" height="40">
+      <p>Microsoft Office</p>
+    </div><div class="tool" data-aos="fade-up"><img src="https://cdn.simpleicons.org/looker/ffffff" alt="Looker Studio"><p>Looker Studio</p></div>
+  </div>
+</section>
+
+<section id="projects" data-aos="fade-up">
+  <h2>Projects</h2>
+  <div class="project-grid">
+    <a href="https://github.com/rafilla19/1001-Events" target="_blank" class="project-card" data-aos="fade-up">
+      <img src="img/1001events.png" alt="1001-Events">
+      <div class="project-content">
+        <div class="project-title">1001-Events</div>
+        <div class="project-description">
+          1001-Events is a web-based platform developed during our second semester with the goal of providing President University students with centralized, comprehensive, and up-to-date access to campus event information. The platform was built using HTML, CSS, PHP, and MySQL, focusing on usability and accessibility to ensure a smooth experience for students looking to stay informed about ongoing and upcoming events.
+        </div>
+      </div>
+    </a>
+
+    <a href="https://github.com/rafilla19/Learnlytics-main" target="_blank" class="project-card" data-aos="fade-up" data-aos-delay="100">
+      <img src="img/learnlytics.png" alt="Learnlytics">
+      <div class="project-content">
+        <div class="project-title">Learnlytics</div>
+        <div class="project-description">
+          Learnlytics is a web-based data science application designed to analyze and predict student academic performance based on their learning activities. This project utilizes data such as grade history, participation in quizzes, assignments, and discussion forums to provide insights for students, lecturers, and academic administrators. The target users of this application include university students, faculty members, and campus management who aim to understand and improve academic outcomes through data-driven approaches.
+        </div>
+      </div>
+    </a>
+
+    <a href="https://github.com/rafilla19/Projectify" target="_blank" class="project-card" data-aos="fade-up" data-aos-delay="200">
+      <img src="img/projectify.png" alt="Projectify">
+      <div class="project-content">
+        <div class="project-title">Projectify</div>
+        <div class="project-description">
+          Projectify is a mobile application developed using Dart with Flutter and integrated with Firebase, aimed at providing a centralized platform for computing students to explore, reference, and collaborate on academic projects. Built with additional support from C++, CMake, and minor usage of Swift, and HTML, the app was created to assist the Research and Development division of PUMA IS in fostering technological innovation and peer collaboration.
+        </div>
+      </div>
+    </a>
+
+<a href="" target="_blank" class="project-card" data-aos="fade-up" data-aos-delay="200">
+      <img src="img/dashboard.png" alt="Dashboard">
+      <div class="project-content">
+        <div class="project-title">Transaction Performance Analysis Dashboard</div>
+        <div class="project-description">
+          Developed an interactive dashboard using Google Looker to analyze transactional data. Performed exploratory data analysis (EDA), cleaned and validated data, and visualized key metrics such as revenue trends, product performance, and customer behavior to support data-driven decisions.
+        </div>
+      </div>
+    </a>
+
+<a href="https://drive.google.com/file/d/18z2REDhI9FdYbE5MZILm0Sh03m-Koa4h/view?usp=sharing" target="_blank" class="project-card" data-aos="fade-up" data-aos-delay="200">
+      <img src="img/expen.png" alt="Expenditure">
+      <div class="project-content">
+        <div class="project-title">Expenditure Cycle</div>
+        <div class="project-description">
+          This project simulates an Expenditure Cycle System, one of the core components in an Accounting Information System (AIS). It focuses on managing the procurement and payment processes for goods and services within an organization. The system is built using HTML to demonstrate the structure and flow of expenditure activities.
+        </div>
+      </div>
+    </a>
+
+<a href="https://github.com/rafilla19/iSense" target="_blank" class="project-card" data-aos="fade-up" data-aos-delay="200">
+      <img src="img/isense.png" alt="isense">
+      <div class="project-content">
+        <div class="project-title">iSense</div>
+        <div class="project-description">
+          iSense is a web-based system that recommends the most suitable academic concentration (Data Science or ERP) for Information System students. By analyzing students’ grades, interests, and skills, the system applies a machine learning model (Logistic Regression) to suggest the best path aligned with their strengths and future goals. Built with HTML, CSS, Django, and integrated with a trained ML model, iSense delivers simple and smart academic decision support.
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section id="certification" data-aos="fade-up">
+  <h2>Certifications</h2>
+
+  <div class="certification-grid">
+  <!-- Baris 1 -->
+  <div class="cert-card" data-aos="zoom-in">
+    <img src="certif/Data Analytics.jpg" alt="Data Analytics Certificate">
+    <p>Data Analytics Certificate</p>
+  </div>
+  <div class="cert-card" data-aos="zoom-in" data-aos-delay="100">
+    <img src="certif/Digital Classroom.jpg" alt="Digital Classroom Certificate">
+    <p>Digital Classroom Certificate</p>
+  </div>
+  <div class="cert-card" data-aos="zoom-in" data-aos-delay="200">
+    <img src="certif/Machine Learning.jpg" alt="Machine Learning Certificate">
+    <p>Machine Learning Certificate</p>
+  </div>
+
+  <!-- Baris 2 -->
+  <div class="cert-card" data-aos="zoom-in">
+    <img src="certif/pylc.jpg" alt="PYLC Certificate">
+    <p>PYLC Committee</p>
+  </div>
+  <div class="cert-card" data-aos="zoom-in" data-aos-delay="100">
+    <img src="certif/Talkvest.jpg" alt="Talkvest Certificate">
+    <p>Talkvest Committee</p>
+  </div>
+  <div class="cert-card" data-aos="zoom-in">
+    <img src="certif/Compsphere.jpeg" alt="Compsphere Award">
+    <p>Compsphere Finalist</p>
+  </div>
+</div>
+</section>
+
+<footer>
+  <p style="font-size: 1.2rem; font-weight: 600;">Rafilla Shalwa Sakina</p>
+  <div class="social-icons" style="justify-content: center; margin-top: 1rem;">
+    <a href="https://www.linkedin.com/in/rafilla-shalwa-sakina/" target="_blank">
+  <img src="img/linkedin.png" alt="LinkedIn" width="26" height="26">
+</a>
+    <a href="https://github.com/rafilla19">
+      <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub">
+    </a>
+    <a href="https://mail.google.com/mail/u/0/?fs=1&to=rafilla.shalwa@gmail.com&tf=cm">
+      <img src="https://cdn.simpleicons.org/gmail/ffffff" alt="Email">
+    </a>
+  </div>
+  <p>© 2025 Rafilla Shalwa Sakina. All rights reserved.</p>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>
+
+</body>
+</html>
